@@ -4,7 +4,7 @@ const isAuthenticated = (req, res, next) => {
   passport.authenticate(
     'jwt',
     {
-      session: '24hs',
+      session: '30min',
     },
     (err, user, info) => {
       console.log('Validating authentication');
