@@ -64,7 +64,7 @@ nodemon app
 #### /book/:id
 
 - `GET` : Get book by id
-- `PUT` : Update a book
+- `PUT` : Update a book with the posibility to change from one library to another, or send a null to remove from the current library
 - `DELETE` : Delete a book
 
 #### /book/new
@@ -85,10 +85,10 @@ nodemon app
 
 ## Process
 
-To make this API the first step was to create the server, for which I used Classes and called it from the main app.js to run it
+To build this API my first step was to create the server, for which I used Classes and called it from the main file app.js, running it with nodemon.
 
 Each entity has its model, controller and service file. All business logic is handled in the service of each entity. To delete an individual library or book, it is done through a boolean property, to prevent the column from being permanently deleted from the database.
 
-Through environment variables the port, name, username and password of the database and the key to encrypt the token are managed, and they were not uploaded to the folder.
+Through environment variables, the port, the secret key to encrypt/decrypt the token and data related to the database such as name, username, password are managed.
 
 The Auth was done with JSONWebToken using Passport.js as a middleware to authenticate the JWT. Critical operations (such as create, update, or delete) carry token authentication.

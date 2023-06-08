@@ -79,7 +79,7 @@ export const updateBookService = async (id, body) => {
     await bookToUpdate.save();
   }
 
-  // Set libraryId to null to remove book from library
+  // Set libraryId to null to remove book from a library
   if (libraryId === null) {
     await bookToUpdate.update({
       libraryId: null,
