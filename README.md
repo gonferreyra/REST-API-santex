@@ -26,7 +26,7 @@ Before running API server, you need to:
 
 ```go
 PORT=8080
-MYSQL_DATABASE_NAME='db_create_name'
+MYSQL_DATABASE_NAME='name_of_db_created'
 MYSQL_DATABASE_USER='your_db_user'
 MYSQL_PASSWORD='your_mysql_password'
 JWT_PASSWORD='your_jwt_secret_pass'
@@ -91,4 +91,4 @@ Each entity has its model, controller and service file. All business logic is ha
 
 Through environment variables the port, name, username and password of the database and the key to encrypt the token are managed, and they were not uploaded to the folder.
 
-The Auth was done with JSONWebToken using Passport.js as a middleware to authenticate the JWT.
+The Auth was done with JSONWebToken using Passport.js as a middleware to authenticate the JWT. Critical operations (such as create, update, or delete) carry token authentication.
