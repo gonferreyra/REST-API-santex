@@ -79,7 +79,7 @@ nodemon app
 
 - `POST` : Create a new user
 
-#### /book/login
+#### /user/login
 
 - `POST` : User login with userName and password
 
