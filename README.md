@@ -7,28 +7,29 @@ The tecnologies used were NodeJs, MySQL for the Database, Sequelize as the ORM, 
 ## Installation & Run
 
 ```bash
-# Download this project
-go get PONER DIRECCION AL PROYECTO
+# Clone this project
+https://github.com/gonferreyra/REST-API-santex
 ```
 
 ```bash
 # Install dependencies
-cd 'folder_path'
+cd REST-API-santex
 npm install
 npm install -g nodemon
 ```
 
-Before running API server, you should set the enviroment variables config by creating a new .env file and seting your values
+Before running API server, you need to:
 
-- [dotenv
-  ](https://www.npmjs.com/package/dotenv)
+- create a Database in MySQL
+- create a .env file ([dotenv
+  ](https://www.npmjs.com/package/dotenv)) for your enviroment variables and set the following values. Note that you need to put your own values on all fields.
 
 ```go
 PORT=8080
-MYSQL_DATABASE_NAME='your_db_name'
+MYSQL_DATABASE_NAME='db_create_name'
 MYSQL_DATABASE_USER='your_db_user'
 MYSQL_PASSWORD='your_mysql_password'
-JWT_PASSWORD='your_jwt_password'
+JWT_PASSWORD='your_jwt_secret_pass'
 ```
 
 To start the server:
@@ -84,10 +85,10 @@ nodemon app
 
 ## Process
 
-To create this API the first step was to create the server wich i used a class and call it on the app.js file.
+To make this API the first step was to create the server, for which I used Classes and called it from the main app.js to run it
 
-Every entity has his model, controller and service file. All the business logic is always on the service file of each entity. On a side note, the delete of individual library and book was made through a boolean property, to prevent the column to be errase permanently from the database.
+Each entity has its model, controller and service file. All business logic is handled in the service of each entity. To delete an individual library or book, it is done through a boolean property, to prevent the column from being permanently deleted from the database.
 
-The keys and password are stored on enviroment variable file and they are not uploaded in the server.
+Through environment variables the port, name, username and password of the database and the key to encrypt the token are managed, and they were not uploaded to the folder.
 
-The Auth was made with JSONWebToken, using Passport.js as a middleware to authenticate the JWT, having the token a session duration of 24hs.
+The Auth was done with JSONWebToken using Passport.js as a middleware to authenticate the JWT.
