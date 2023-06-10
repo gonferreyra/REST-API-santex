@@ -10,8 +10,14 @@ export const getAll = async () => {
       {
         as: 'books',
         model: Book,
+        where: {
+          isActive: true,
+        },
+        required: false,
       },
     ],
+    plain: false,
+    nest: true,
   });
 
   if (librariesList.length < 1) {
