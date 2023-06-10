@@ -43,7 +43,7 @@ export const newBookWithoutLibrary = async (isbn, title, author, year) => {
 export const updateBookService = async (id, body) => {
   const { isbn, title, author, year, libraryId } = body;
 
-  // Check is Library exist
+  // Check if Library exist
   const checkLibrary = await Libraries.findOne({
     where: {
       id: libraryId,
@@ -64,6 +64,12 @@ export const updateBookService = async (id, body) => {
     throw new Error(`There is no book on the Database with the id ${id}`);
   }
 
+  if (bookToUpdate.isActive === false) {
+    throw new Error(
+      `The selected book with the id ${id} is inactive. Contact administrator tu activate it again.`
+    );
+  }
+
   // Update Fields
   if (bookToUpdate) {
     if (isbn) {
@@ -75,6 +81,11 @@ export const updateBookService = async (id, body) => {
     } else if (year) {
       bookToUpdate.year = year;
     }
+    // Uncoment to activate a deleted book through update endpoint
+
+    // else if (isActive) {
+    //   bookToUpdate.isActive = 1;
+    // }
 
     await bookToUpdate.save();
   }
@@ -84,28 +95,27 @@ export const updateBookService = async (id, body) => {
     await bookToUpdate.update({
       libraryId: null,
     });
+  } else {
+    await bookToUpdate.update({
+      libraryId: libraryId,
+    });
   }
 
   return bookToUpdate;
 };
 
 export const deactivateBook = async (id) => {
-  const deleteBook = await Book.update(
-    {
-      isActive: false,
-    },
-    {
-      where: {
-        idLibraries: id,
-      },
-    }
-  );
+  const deleteBook = await Book.findByPk(id);
 
   if (!deleteBook) {
     throw new Error(
       `Error. The book with the id ${id} wasn't found on the Database.`
     );
   }
+
+  deleteBook.isActive = false;
+
+  await deleteBook.save();
 
   return deleteBook;
 };

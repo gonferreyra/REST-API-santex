@@ -1,6 +1,7 @@
 import { request, response } from 'express';
 import {
   bookById,
+  deactivateBook,
   getAll,
   newBook,
   newBookWithoutLibrary,
@@ -74,7 +75,7 @@ export const deleteBook = async (req = request, res = resolve, next) => {
   const { id } = req.params;
 
   try {
-    const deletedBook = await deactiveBook(id);
+    const deletedBook = await deactivateBook(id);
 
     res.json({
       deletedBook,
