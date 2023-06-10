@@ -100,6 +100,11 @@ export const updateBookService = async (id, body) => {
       libraryId: libraryId,
     });
   }
+  if (libraryId !== null) {
+    await bookToUpdate.update({
+      libraryId: libraryId,
+    });
+  }
 
   return bookToUpdate;
 };
